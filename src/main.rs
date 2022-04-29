@@ -11,16 +11,19 @@ fn reverse(pair: (i32, bool)) -> (bool, i32) {
 struct Matrix(f32, f32, f32, f32);
 impl std::fmt::Display for Matrix {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "({}, {})\n({}, {})", self.0, self.1, self.2, self.3)
+        write!(f, "( {}, {} )\n( {}, {} )", self.0, self.1, self.2, self.3)
     }
+}
+
+fn transpose(mat: Matrix) -> Matrix {
+    Matrix(mat.0, mat.2, mat.1, mat.3)
 }
 
 fn main() {
     // A tuple with a bunch of different types
-    let long_tuple = (1u8, 2u16, 3u32, 4u64,
-                      -1i8, -2i16, -3i32, -4i64,
-                      0.1f32, 0.2f64,
-                      'a', true);
+    let long_tuple = (
+        1u8, 2u16, 3u32, 4u64, -1i8, -2i16, -3i32, -4i64, 0.1f32, 0.2f64, 'a', true,
+    );
 
     // Values can be extracted from the tuple using tuple indexing
     println!("long tuple first value: {}", long_tuple.0);
@@ -31,7 +34,7 @@ fn main() {
 
     // Tuples are printable
     println!("tuple of tuples: {:?}", tuple_of_tuples);
-    
+
     // But long Tuples cannot be printed
     // let too_long_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
     // println!("too long tuple: {:?}", too_long_tuple);
@@ -56,4 +59,6 @@ fn main() {
     let matrix = Matrix(1.1, 1.2, 2.1, 2.2);
     println!("{}", matrix);
 
+    println!("Matrix:\n{}", matrix);
+    println!("Transpose:\n{}", transpose(matrix));
 }
